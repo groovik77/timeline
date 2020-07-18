@@ -1,0 +1,13 @@
+RewriteEngine On
+
+RewriteCond %{SERVER_PORT} !^443$
+
+RewriteRule .* https://%{SERVER_NAME}%{REQUEST_URI} [R=301,L]
+
+RewriteCond %{HTTP_HOST} ^www\.(.*)$
+RewriteRule ^(.*)$ https://%1/$1 [L,R=301] 
+
+<FilesMatch "\.(ogg|ogv|svg|svgz|eot|otf|woff|mp4|ttf|rss|atom|jpg|jpeg|gif|png|ico|zip|tgz|gz|rar|bz2|doc|xls|exe|ppt|tar|mid|midi|wav|bmp|rtf|webp)$">
+    Header set Cache-Control "max-age=2592000, must-revalidate"
+</FilesMatch>
+    
